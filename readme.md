@@ -31,6 +31,17 @@ Assumptions and Criteria
 3. graph is reloaded for any modification of nodes or edges in database.
 4. application provides real-time updated routes with no delay, so memory was the second consideration.
 
+The Application follows the [CQRS Pattern](https://martinfowler.com/bliki/CQRS.html) in a very simple way by separating the persistence view (Planets and Routes data store) and the query view. 
+Query view is constantly refreshed and synced with data store view. This way the query view can be scaled and optimized for varied scenario (having graph for each node as start).
+All the queries for route discovery are served using the query view.
+Planet discovery will be the command view to manage the planets and routes.
+
+### TODO
+1. Implement HATEOAS so that api is self discoverable.
+2. Support for the content negotiation to support various clients (Web, Mobile, Application Client).
+3. Provide flexibility for multiple graphs for different planets as source.
+4. web sockets ?? to update the route on client side??
+
 ## REst API Documentation
 once the application is running,
 go to http://localhost:5000/pytheas/swagger-ui.html for api usage.
