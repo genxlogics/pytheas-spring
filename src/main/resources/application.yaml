@@ -16,3 +16,7 @@ spring:
 server:
   servlet:
     context-path: '/pytheas'
+  port: 5000
+logging:
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error

@@ -47,14 +47,6 @@ public class RouteEngine {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//
-//        try {
-//            System.out.println(mapper.writeValueAsString(shortestPathRoute));
-//            System.out.println(mapper.writeValueAsString(shortestPathRouteWithTraffic));
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-
 
     }
 

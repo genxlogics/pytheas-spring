@@ -23,18 +23,21 @@ public class TrafficRepository {
     }
     public List<TrafficRoute> getRouteInfo(boolean withTraffic,String destinationId){
 
+        // fetch the planets collect into a map of Map<PlanetCode,Planet>
         Map<String,Planet> lookup=planetRepository.findAll().stream().collect(Collectors.toMap(
            Planet::getNode,
                 planet->planet
         ));
 
         List<TrafficRoute> routes=new ArrayList<>();
+        // fetch the routing table from cache.
         Map<String,RouteNode> cachedMap=routeEngine.getTraceRoute(withTraffic);
         if (lookup.get(destinationId)==null)
             throw new RecordNotFoundException("Planet is not discovered yet ");
         if (cachedMap==null)
             throw new RecordNotFoundException("No path exists from Earth to "+lookup.get(destinationId).getName());
 
+        // prepare the route from earth to destination with all connected intermediaries.
         TrafficRoute tr;
         String current=destinationId;
         do {

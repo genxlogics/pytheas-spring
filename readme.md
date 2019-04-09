@@ -42,6 +42,7 @@ Planet discovery will be the command view to manage the planets and routes.
 3. Provide flexibility for multiple graphs for different planets as source.
 4. web sockets ?? to update the route on client side??
 
+
 ## REst API Documentation
 once the application is running,
 go to http://localhost:5000/pytheas/swagger-ui.html for api usage.
