@@ -3,6 +3,9 @@ package bylogics.io.pytheas.db;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "routes")
@@ -15,17 +18,21 @@ public class Route {
     private Long routeId;
 
     @Column(name = "from_node")
+    @NotBlank(message = "starting node can not be empty")
     @JsonProperty("fromNode")
     private String from;
     @Column(name = "to_node")
     @JsonProperty("toNode")
+    @NotBlank(message = "destination node can not be empty")
     private String to;
-
+    @Positive(message = "distance can not be zero or negative")
     @Column(name = "distance")
     @JsonProperty("distance")
+
     private Double distance;
     @JsonProperty("time")
     @Column(name = "time")
+    @PositiveOrZero(message = "traffic time can not be negative")
     private double time;
 
     public double getTime() {

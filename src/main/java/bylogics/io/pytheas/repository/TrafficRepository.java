@@ -4,6 +4,7 @@ import bylogics.io.pytheas.RouteEngine;
 import bylogics.io.pytheas.db.Planet;
 import bylogics.io.pytheas.db.RouteNode;
 import bylogics.io.pytheas.domain.TrafficRoute;
+import bylogics.io.pytheas.error.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +22,7 @@ public class TrafficRepository {
         this.planetRepository=pr;
     }
     public List<TrafficRoute> getRouteInfo(boolean withTraffic,String destinationId){
+
         Map<String,Planet> lookup=planetRepository.findAll().stream().collect(Collectors.toMap(
            Planet::getNode,
                 planet->planet
@@ -28,6 +30,11 @@ public class TrafficRepository {
 
         List<TrafficRoute> routes=new ArrayList<>();
         Map<String,RouteNode> cachedMap=routeEngine.getTraceRoute(withTraffic);
+        if (lookup.get(destinationId)==null)
+            throw new RecordNotFoundException("Planet is not discovered yet ");
+        if (cachedMap==null)
+            throw new RecordNotFoundException("No path exists from Earth to "+lookup.get(destinationId).getName());
+
         TrafficRoute tr;
         String current=destinationId;
         do {

@@ -15,4 +15,7 @@ public interface RouteRepository extends JpaRepository<Route,Long> {
     @Query("update Route r set r.time = :time where r.from = :from_node and r.to = :to_node")
     @Transactional
     int updateRoute(@Param("time") double time, @Param("from_node")String source,@Param("to_node")String destination);
+    List<Route> findRoutesByTo(String to);
+
+    boolean existsRouteByFromAndTo(String from,String to);
 }
