@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TrafficRoute {
 
+
     @JsonProperty("planetId")
     private Long planetId;
     @JsonProperty("planetName")

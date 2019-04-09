@@ -36,6 +36,7 @@ public class RouteController {
                                  @RequestParam(name = "traffic",required = false,defaultValue = "false")boolean traffic) {
         System.out.println("Received request for route to "+to+" and traffic usage "+traffic);
         List<TrafficRoute> routes=trafficRepository.getRouteInfo(traffic,to);
+
         try {
             System.out.println(new ObjectMapper().writeValueAsString(routes));
         } catch (JsonProcessingException e) {
